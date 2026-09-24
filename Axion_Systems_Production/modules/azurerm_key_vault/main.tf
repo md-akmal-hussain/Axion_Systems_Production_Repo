@@ -1,0 +1,24 @@
+resource "azurerm_key_vault" "vault" {
+  for_each = var.key_vaults
+
+  name                        = each.value.key_vault_name
+  location                    = each.value.location
+  resource_group_name         = each.value.resource_group_name
+  enabled_for_disk_encryption = each.value.enabled_for_disk_encryption
+
+  tenant_id = data.azurerm_client_config.current.tenant_id
+
+  soft_delete_retention_days = each.value.soft_delete_retention_days
+  purge_protection_enabled   = each.value.purge_protection_enabled
+  sku_name                   = each.value.key_vault_sku_name
+
+  rbac_authorization_enabled = true
+}
+
+resource "azurerm_role_assignment" "key_vault_secrets_user" {
+  for_each = var.key_vaults
+
+  scope                = azurerm_key_vault.vault[each.key].id
+  role_definition_name = "Key Vault Secrets User"
+  principal_id         = var.key_vault_principal_id
+}
