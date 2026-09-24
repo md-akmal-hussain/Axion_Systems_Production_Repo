@@ -11,7 +11,7 @@ variables:
   - group: Terraform-Variables
 
   - name: terraformWorkingDirectory
-    value: '$(System.DefaultWorkingDirectory)/Axion_Systems_Production/environments/dev'
+    value: '$(System.DefaultWorkingDirectory)/environments/dev'
 
   - name: serviceConnection
     value: 'Yaml_Svc'
