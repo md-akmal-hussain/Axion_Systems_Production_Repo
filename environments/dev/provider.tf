@@ -11,7 +11,7 @@ terraform {
    backend "azurerm" {
     resource_group_name  ="pipelinestg"
     storage_account_name = "stgnagpipeline"
-    container_name       = "yaml-container"
+    container_name       = "production-container"
     key                  = "axion-systems-dev.terraform.tfstate"
   }
 }

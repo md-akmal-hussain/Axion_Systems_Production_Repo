@@ -28,6 +28,9 @@ variables:
   - name: ContainerName
     value: 'production-container'
 
+  - name: 'backendStorageAccountKey'
+    value:  'axion-systems-dev.terraform.tfstate'  
+
 
 stages:
 
@@ -62,7 +65,7 @@ stages:
         backendAzureRmResourceGroupName: '$(ResourceGroupName)'
         backendAzureRmStorageAccountName: '$(StorageAccountName)'
         backendAzureRmContainerName: '$(ContainerName)'
-        backendAzureRmKey: 'dev.terraform.tfstate'
+        backendAzureRmKey: '$(backendStorageAccountKey)'
 
     # --------------------------------------------------------
     # Terraform Validate
@@ -258,7 +261,7 @@ stages:
         backendAzureRmResourceGroupName: '$(ResourceGroupName)'
         backendAzureRmStorageAccountName: '$(StorageAccountName)'
         backendAzureRmContainerName: '$(ContainerName)'
-        backendAzureRmKey: 'dev.terraform.tfstate'
+        backendAzureRmKey: '$(backendStorageAccountKey)'
 
 
     # ---------------------------------------------------------
@@ -592,7 +595,7 @@ stages:
         backendAzureRmResourceGroupName: '$(ResourceGroupName)'
         backendAzureRmStorageAccountName: '$(StorageAccountName)'
         backendAzureRmContainerName: '$(ContainerName)'
-        backendAzureRmKey: 'dev.terraform.tfstate'
+        backendAzureRmKey: '$(backendStorageAccountKey)'
 
 
     # --------------------------------------------------------
