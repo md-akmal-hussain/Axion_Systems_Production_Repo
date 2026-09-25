@@ -22,3 +22,19 @@ resource "azurerm_role_assignment" "key_vault_secrets_user" {
   role_definition_name = "Key Vault Secrets User"
   principal_id         = var.key_vault_principal_id
 }
+
+resource "azurerm_key_vault_secret" "vm_username" {
+  for_each = toset(nonsensitive(keys(var.vm_admin_usernames)))
+
+  name         = "${each.key}-username"
+  value        = var.vm_admin_usernames[each.key]
+  key_vault_id = azurerm_key_vault.vault["keyvault1"].id
+}
+
+resource "azurerm_key_vault_secret" "vm_password" {
+   for_each = toset(nonsensitive(keys(var.vm_admin_passwords)))
+
+  name         = "${each.key}-password"
+  value        = var.vm_admin_passwords[each.key]
+  key_vault_id = azurerm_key_vault.vault["keyvault1"].id
+}

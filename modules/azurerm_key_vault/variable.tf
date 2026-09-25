@@ -16,3 +16,15 @@ variable "key_vault_principal_id" {
   type        = string
   description = "Principal ID that can read Key Vault secrets."
 }
+
+variable "vm_admin_usernames" {
+  description = "Admin usernames for Linux VMs to store in Key Vault."
+  type        = map(string)
+  sensitive   = true
+}
+
+variable "vm_admin_passwords" {
+  description = "Admin passwords for Linux VMs to store in Key Vault."
+  type        = map(string)
+  sensitive   = true
+}

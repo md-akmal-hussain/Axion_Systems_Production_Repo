@@ -10,6 +10,9 @@ module "key_vault" {
 
   key_vault_principal_id = var.key_vault_principal_id
 
+  vm_admin_usernames = var.vm_admin_usernames
+  vm_admin_passwords = var.vm_admin_passwords
+
   depends_on = [
     module.resource_group
   ]
