@@ -15,6 +15,8 @@ variable "vms" {
 
     # Authentication
     disable_password_authentication = bool
+    admin_username                  = string
+    admin_password                  = string
 
     # Network configuration
     vnet_name   = string
@@ -23,7 +25,7 @@ variable "vms" {
     pip_name    = string
     nsg_name    = string
 
-    # NSG security rule
+    # NSG Rule
     sr_name                       = string
     sr_priority                   = number
     sr_direction                  = string
@@ -34,18 +36,20 @@ variable "vms" {
     sr_source_address_prefix      = string
     sr_destination_address_prefix = string
 
-    # NIC IP configuration
+    # NIC IP Configuration
     ip_config_name                = string
     private_ip_address_allocation = string
 
-    # OS disk
+    # OS Disk
     os_caching              = string
     os_storage_account_type = string
 
-    # Source image
+    # Source Image
     sir_publisher = string
     sir_offer     = string
     sir_sku       = string
     sir_version   = string
   }))
+
+  
 }
