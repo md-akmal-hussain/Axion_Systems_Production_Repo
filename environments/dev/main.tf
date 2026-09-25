@@ -8,7 +8,13 @@ module "key_vault" {
 
   key_vaults = var.key_vaults
 
-   key_vault_principal_id = var.key_vault_principal_id
+  key_vault_principal_id = var.key_vault_principal_id
+
+  vm_admin_usernames = var.vm_admin_usernames
+  vm_admin_passwords = var.vm_admin_passwords
+
+  postgres_admin_usernames = var.postgres_admin_usernames
+  postgres_admin_passwords = var.postgres_admin_passwords
 
   depends_on = [
     module.resource_group

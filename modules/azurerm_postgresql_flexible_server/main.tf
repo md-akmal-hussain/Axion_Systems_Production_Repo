@@ -17,9 +17,10 @@ resource "azurerm_postgresql_flexible_server" "psql" {
 
   public_network_access_enabled = each.value.public_network_access_enabled
 
-    lifecycle {
+  lifecycle {
     ignore_changes = [
       zone
     ]
   }
 }
+
