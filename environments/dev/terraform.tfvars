@@ -109,7 +109,7 @@ key_vaults = {
 
 
 vms = {
-  frontend-vm = {
+  vm1 = {
     vm_name             = "frontend-vm-axion-01"
     resource_group_name = "rg-axion-systems-dev-01"
     location            = "central india"
@@ -149,7 +149,7 @@ vms = {
 
   }
 
-  backend-vm = {
+  vm2 = {
     vm_name             = "backend-vm-axion-01"
     resource_group_name = "rg-axion-systems-dev-01"
     location            = "central india"
