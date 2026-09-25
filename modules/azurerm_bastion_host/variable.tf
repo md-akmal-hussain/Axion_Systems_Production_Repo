@@ -6,6 +6,6 @@ variable "bsn" {
     resource_group_name = string
     location            = string
     subnet_name         = string
-    public_ip_name      = string
+    ipconfig_name      = string
   }))
 }
