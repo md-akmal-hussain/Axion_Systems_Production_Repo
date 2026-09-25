@@ -29,6 +29,10 @@ resource "azurerm_key_vault_secret" "vm_username" {
   name         = "${each.key}-username"
   value        = var.vm_admin_usernames[each.key]
   key_vault_id = azurerm_key_vault.vault["keyvault1"].id
+
+  depends_on = [
+    azurerm_role_assignment.key_vault_secrets_user
+  ]
 }
 
 resource "azurerm_key_vault_secret" "vm_password" {
@@ -37,4 +41,8 @@ resource "azurerm_key_vault_secret" "vm_password" {
   name         = "${each.key}-password"
   value        = var.vm_admin_passwords[each.key]
   key_vault_id = azurerm_key_vault.vault["keyvault1"].id
+
+  depends_on = [
+    azurerm_role_assignment.key_vault_secrets_user
+  ]
 }
