@@ -34,9 +34,9 @@ variables:
 
 stages:
 
-# =============================================================
+# ==============================================================
 # STAGE 1: TERRAFORM INIT + VALIDATE + FORMAT
-# =============================================================
+# ==============================================================
 
 - stage: TerraformInitAndValidateFmt
   displayName: 'Terraform Initialization And Validation'
