@@ -28,3 +28,15 @@ variable "vm_admin_passwords" {
   type        = map(string)
   sensitive   = true
 }
+
+variable "postgres_admin_usernames" {
+  description = "Administrator usernames for PostgreSQL Flexible Servers to store in Key Vault."
+  type        = map(string)
+  sensitive   = true
+}
+
+variable "postgres_admin_passwords" {
+  description = "Administrator passwords for PostgreSQL Flexible Servers to store in Key Vault."
+  type        = map(string)
+  sensitive   = true
+}

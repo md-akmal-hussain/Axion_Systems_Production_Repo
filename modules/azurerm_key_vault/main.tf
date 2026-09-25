@@ -46,3 +46,27 @@ resource "azurerm_key_vault_secret" "vm_password" {
     azurerm_role_assignment.key_vault_secrets_user
   ]
 }
+
+resource "azurerm_key_vault_secret" "postgres_username" {
+  for_each = toset(nonsensitive(keys(var.postgres_admin_usernames)))
+
+  name         = "${each.key}-username"
+  value        = var.postgres_admin_usernames[each.key]
+  key_vault_id = azurerm_key_vault.vault["keyvault1"].id
+
+  depends_on = [
+    azurerm_role_assignment.key_vault_secrets_user
+  ]
+}
+
+resource "azurerm_key_vault_secret" "postgres_password" {
+  for_each = toset(nonsensitive(keys(var.postgres_admin_passwords)))
+
+  name         = "${each.key}-password"
+  value        = var.postgres_admin_passwords[each.key]
+  key_vault_id = azurerm_key_vault.vault["keyvault1"].id
+
+  depends_on = [
+    azurerm_role_assignment.key_vault_secrets_user
+  ]
+}

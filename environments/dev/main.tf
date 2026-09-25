@@ -13,6 +13,9 @@ module "key_vault" {
   vm_admin_usernames = var.vm_admin_usernames
   vm_admin_passwords = var.vm_admin_passwords
 
+  postgres_admin_usernames = var.postgres_admin_usernames
+  postgres_admin_passwords = var.postgres_admin_passwords
+
   depends_on = [
     module.resource_group
   ]

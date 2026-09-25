@@ -23,5 +23,5 @@ variable "psql" {
     # Network
     public_network_access_enabled = bool
   }))
-
 }
+
