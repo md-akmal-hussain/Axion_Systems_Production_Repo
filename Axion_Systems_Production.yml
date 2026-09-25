@@ -26,7 +26,7 @@ variables:
     value: 'stgnagpipeline'
 
   - name: ContainerName
-    value: 'yaml-container'
+    value: 'production-container'
 
 
 stages:
