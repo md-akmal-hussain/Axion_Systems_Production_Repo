@@ -73,7 +73,7 @@ bsn = {
     resource_group_name = "rg-axion-systems-dev-01"
     location            = "Central India"
     subnet_name         = "AzureBastionSubnet"
-    vnet_name           = "vnet-axion-systems-dev-01"
+    
 
     ipconfig_name = "bsn-pip-axion-01"
   }

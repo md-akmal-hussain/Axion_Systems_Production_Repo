@@ -43,7 +43,7 @@ variable "subnets" {
   type = map(object({
     subnet_name         = string
     resource_group_name = string
-    virtual_network_name = string
+    vnet_name = string
     address_prefixes    = list(string)
   }))
 }
@@ -61,7 +61,7 @@ variable "pips" {
     resource_group_name = string
     location            = string
     allocation_method   = string
-    sku                 = string
+    
   }))
 }
 
@@ -131,11 +131,11 @@ variable "bsn" {
   description = "Azure Bastion Host configuration."
 
   type = map(object({
-    name                = string
+    bsn_name                = string
     resource_group_name = string
     location            = string
     subnet_name         = string
-    public_ip_name      = string
+    ipconfig_name      = string
   }))
 }
 
