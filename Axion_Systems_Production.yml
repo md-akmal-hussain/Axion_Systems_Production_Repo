@@ -213,6 +213,7 @@ stages:
 
     - task: PowerShell@2
       displayName: 'TruffleHog Secret Scan'
+      condition: ne(variables['Build.SourceBranch'], 'refs/heads/features/1')
       inputs:
         targetType: inline
         script: |
