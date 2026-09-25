@@ -8,7 +8,7 @@ module "key_vault" {
 
   key_vaults = var.key_vaults
 
-   key_vault_principal_id = var.key_vault_principal_id
+  key_vault_principal_id = var.key_vault_principal_id
 
   depends_on = [
     module.resource_group
@@ -43,8 +43,8 @@ module "public_ip" {
 
 module "bastion_host" {
   source = "../../modules/azurerm_bastion_host"
-  bsn = var.bsn
-  
+  bsn    = var.bsn
+
   depends_on = [module.subnet, module.public_ip]
 
 }

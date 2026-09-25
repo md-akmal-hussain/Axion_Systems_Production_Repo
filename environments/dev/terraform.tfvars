@@ -73,7 +73,8 @@ bsn = {
     resource_group_name = "rg-axion-systems-dev-01"
     location            = "Central India"
     subnet_name         = "AzureBastionSubnet"
-    
+    vnet_name           = "vnet-axion-systems-dev-01"
+
 
     ipconfig_name = "bsn-pip-axion-01"
   }
@@ -99,7 +100,7 @@ key_vaults = {
   keyvault1 = {
     key_vault_name              = "kv-axion-systems-dev-01"
     location                    = "Central India"
-    resource_group_name = "rg-axion-systems-dev-01"
+    resource_group_name         = "rg-axion-systems-dev-01"
     enabled_for_disk_encryption = true
     soft_delete_retention_days  = 90
     purge_protection_enabled    = true

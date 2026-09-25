@@ -136,6 +136,7 @@ variable "bsn" {
     location            = string
     subnet_name         = string
     ipconfig_name       = string
+    vnet_name           = string
   }))
 }
 

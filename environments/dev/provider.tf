@@ -1,5 +1,5 @@
 terraform {
-   required_version = ">= 1.14.0"
+  required_version = ">= 1.14.0"
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
@@ -8,8 +8,8 @@ terraform {
     }
   }
 
-   backend "azurerm" {
-    resource_group_name  ="pipelinestg"
+  backend "azurerm" {
+    resource_group_name  = "pipelinestg"
     storage_account_name = "stgnagpipeline"
     container_name       = "production-container"
     key                  = "axion-systems-dev.terraform.tfstate"
