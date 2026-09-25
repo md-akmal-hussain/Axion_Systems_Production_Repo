@@ -287,6 +287,49 @@ stages:
           Write-Host "Terraform variable validation passed."
 
 
+# ---------------------------------------------------------
+# Create Terraform Credentials File
+# ---------------------------------------------------------
+
+    - task: PowerShell@2
+      displayName: 'Create Terraform Credentials File'
+      inputs:
+        targetType: inline
+        workingDirectory: '$(terraformWorkingDirectory)'
+        script: |
+          $terraformVars = @{
+            vm_admin_usernames = @{
+              vm1 = $env:VM1_USERNAME
+              vm2 = $env:VM2_USERNAME
+            }
+
+            vm_admin_passwords = @{
+              vm1 = $env:VM1_PASSWORD
+              vm2 = $env:VM2_PASSWORD
+            }
+
+            postgres_admin_usernames = @{
+              psql1 = $env:PSQL1_USERNAME
+            }
+
+            postgres_admin_passwords = @{
+              psql1 = $env:PSQL1_PASSWORD
+            }
+          }
+
+          $terraformVars |
+            ConvertTo-Json -Depth 10 |
+            Set-Content -Path "pipeline.auto.tfvars.json" -Encoding UTF8
+
+          Write-Host "Terraform credentials file created successfully."
+      env:
+        VM1_USERNAME: $(vm1_username)
+        VM1_PASSWORD: $(vm1_password)
+        VM2_USERNAME: $(vm2_username)
+        VM2_PASSWORD: $(vm2_password)
+        PSQL1_USERNAME: $(psql1_username)
+        PSQL1_PASSWORD: $(psql1_password)  
+
     # ---------------------------------------------------------
     # Terraform Plan
     # ---------------------------------------------------------
@@ -298,15 +341,11 @@ stages:
         command: 'plan'
         workingDirectory: '$(terraformWorkingDirectory)'
         environmentServiceNameAzureRM: '$(serviceConnection)'
-        commandOptions: '-out=tfplan -input=false'
+        commandOptions: '-out=tfplan -input=false -var-file=pipeline.auto.tfvars.json'
       env:
         TF_VAR_key_vault_principal_id: $(key_vault_principal_id)
 
-        TF_VAR_vm_admin_usernames: $(vm_admin_usernames)
-        TF_VAR_vm_admin_passwords: $(vm_admin_passwords)
 
-        TF_VAR_postgres_admin_usernames: $(postgres_admin_usernames)
-        TF_VAR_postgres_admin_passwords: $(postgres_admin_passwords)
 
 
     # --------------------------------------------------------
