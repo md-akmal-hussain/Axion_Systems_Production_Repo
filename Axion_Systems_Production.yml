@@ -103,7 +103,7 @@ stages:
   dependsOn:
     - TerraformInitAndValidateFmt
 
-  condition: eq(1, 2)
+  condition: succeeded()
 
   pool:
     name: $(poolName)
@@ -477,7 +477,7 @@ stages:
   dependsOn:
     - TerraformPlan
 
-  condition: succeeded()
+  condition: eq(1, 2)
 
   pool:
     name: $(poolName)
@@ -643,7 +643,7 @@ stages:
   displayName: 'Terraform Apply'
 
   dependsOn:
-    - TerraformInitAndValidateFmt
+    - TerraformPlan
 
   condition: succeeded()
 
