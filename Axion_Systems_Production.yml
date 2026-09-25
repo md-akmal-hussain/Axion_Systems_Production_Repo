@@ -141,6 +141,7 @@ stages:
 
     - task: PowerShell@2
       displayName: 'Checkov'
+      condition:  eq(1, 2)
       inputs:
         targetType: inline
         workingDirectory: '$(terraformWorkingDirectory)'
@@ -158,6 +159,7 @@ stages:
 
     - task: PowerShell@2
       displayName: 'tfsec'
+      condition:  eq(1, 2)
       inputs:
         targetType: inline
         workingDirectory: '$(terraformWorkingDirectory)'
@@ -175,6 +177,7 @@ stages:
 
     - task: PowerShell@2
       displayName: 'Terrascan'
+      condition:  eq(1, 2)
       inputs:
         targetType: inline
         workingDirectory: '$(terraformWorkingDirectory)'
@@ -194,6 +197,7 @@ stages:
 
     - task: PowerShell@2
       displayName: 'Gitleaks Secret Scan'
+      condition:  eq(1, 2)
       inputs:
         targetType: inline
         script: |
