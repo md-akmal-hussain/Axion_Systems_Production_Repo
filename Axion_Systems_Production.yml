@@ -645,7 +645,7 @@ stages:
   dependsOn:
     - ManualApproval
 
-  condition: eq(1, 2)
+  condition: succeeded()
 
   pool:
     name: $(poolName)
