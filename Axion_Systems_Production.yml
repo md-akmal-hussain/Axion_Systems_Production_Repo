@@ -294,9 +294,15 @@ stages:
         command: 'plan'
         workingDirectory: '$(terraformWorkingDirectory)'
         environmentServiceNameAzureRM: '$(serviceConnection)'
-        commandOptions: '-out=tfplan -input=false -detailed-exitcode'
+        commandOptions: '-out=tfplan -input=false'
       env:
         TF_VAR_key_vault_principal_id: $(key_vault_principal_id)
+
+        TF_VAR_vm_admin_usernames: $(vm_admin_usernames)
+        TF_VAR_vm_admin_passwords: $(vm_admin_passwords)
+
+        TF_VAR_postgres_admin_usernames: $(postgres_admin_usernames)
+        TF_VAR_postgres_admin_passwords: $(postgres_admin_passwords)
 
 
     # --------------------------------------------------------
