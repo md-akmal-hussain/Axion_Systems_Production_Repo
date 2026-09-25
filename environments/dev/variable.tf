@@ -43,7 +43,7 @@ variable "subnets" {
   type = map(object({
     subnet_name         = string
     resource_group_name = string
-    vnet_name = string
+    vnet_name           = string
     address_prefixes    = list(string)
   }))
 }
@@ -61,7 +61,7 @@ variable "pips" {
     resource_group_name = string
     location            = string
     allocation_method   = string
-    
+
   }))
 }
 
@@ -131,11 +131,11 @@ variable "bsn" {
   description = "Azure Bastion Host configuration."
 
   type = map(object({
-    bsn_name                = string
+    bsn_name            = string
     resource_group_name = string
     location            = string
     subnet_name         = string
-    ipconfig_name      = string
+    ipconfig_name       = string
   }))
 }
 
@@ -148,13 +148,13 @@ variable "psql" {
   description = "Azure PostgreSQL Flexible Server configuration."
 
   type = map(object({
-    psql_name                    = string
-    resource_group_name          = string
-    location                     = string
-    version                      = string
-    storage_mb                   = number
-    storage_tier                 = string
-    sku_name                     = string
+    psql_name                     = string
+    resource_group_name           = string
+    location                      = string
+    version                       = string
+    storage_mb                    = number
+    storage_tier                  = string
+    sku_name                      = string
     public_network_access_enabled = bool
   }))
 }

@@ -43,8 +43,8 @@ module "public_ip" {
 
 module "bastion_host" {
   source = "../../modules/azurerm_bastion_host"
-  bsn    = var.bsn
-
+  bsn = var.bsn
+  
   depends_on = [module.subnet, module.public_ip]
 
 }
