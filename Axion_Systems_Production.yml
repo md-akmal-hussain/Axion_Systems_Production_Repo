@@ -287,9 +287,9 @@ stages:
           Write-Host "Terraform variable validation passed."
 
 
-# ---------------------------------------------------------
-# Create Terraform Credentials File
-# ---------------------------------------------------------
+    # ---------------------------------------------------------
+    # Create Terraform Credentials File
+    # ---------------------------------------------------------
 
     - task: PowerShell@2
       displayName: 'Create Terraform Credentials File'
@@ -317,9 +317,15 @@ stages:
             }
           }
 
-          $terraformVars |
-            ConvertTo-Json -Depth 10 |
-            Set-Content -Path "pipeline.auto.tfvars.json" -Encoding UTF8
+          $json = $terraformVars | ConvertTo-Json -Depth 10
+
+          $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+
+          [System.IO.File]::WriteAllText(
+            "$(terraformWorkingDirectory)\pipeline.auto.tfvars.json",
+            $json,
+            $utf8NoBom
+          )
 
           Write-Host "Terraform credentials file created successfully."
       env:
@@ -328,7 +334,7 @@ stages:
         VM2_USERNAME: $(vm2_username)
         VM2_PASSWORD: $(vm2_password)
         PSQL1_USERNAME: $(psql1_username)
-        PSQL1_PASSWORD: $(psql1_password)  
+        PSQL1_PASSWORD: $(psql1_password)
 
     # ---------------------------------------------------------
     # Terraform Plan
