@@ -28,7 +28,7 @@ variables:
   - name: ContainerName
     value: 'production-container'
 
-  - name: 'backendStorageAccountKey'
+  - name: 'backendKey'
     value:  'axion-systems-dev.terraform.tfstate'  
 
 
@@ -65,7 +65,7 @@ stages:
         backendAzureRmResourceGroupName: '$(ResourceGroupName)'
         backendAzureRmStorageAccountName: '$(StorageAccountName)'
         backendAzureRmContainerName: '$(ContainerName)'
-        backendAzureRmKey: '$(backendStorageAccountKey)'
+        backendAzureRmKey: '$(backendKey)'
 
     # --------------------------------------------------------
     # Terraform Validate
@@ -261,7 +261,25 @@ stages:
         backendAzureRmResourceGroupName: '$(ResourceGroupName)'
         backendAzureRmStorageAccountName: '$(StorageAccountName)'
         backendAzureRmContainerName: '$(ContainerName)'
-        backendAzureRmKey: '$(backendStorageAccountKey)'
+        backendAzureRmKey: '$(backendKey)'
+
+
+    # --------------------------------------------------------
+    # Validate Key Vault Principal ID
+    # --------------------------------------------------------
+
+    - task: PowerShell@2
+      displayName: 'Validate Key Vault Principal ID'
+      inputs:
+        targetType: inline
+        script: |
+          if ([string]::IsNullOrWhiteSpace("$(key_vault_principal_id)")) {
+              Write-Error "key_vault_principal_id is missing from Variable Group."
+              exit 1
+          }
+
+          Write-Host "key_vault_principal_id is available."
+          Write-Host "Terraform variable validation passed."
 
 
     # ---------------------------------------------------------
@@ -275,7 +293,9 @@ stages:
         command: 'plan'
         workingDirectory: '$(terraformWorkingDirectory)'
         environmentServiceNameAzureRM: '$(serviceConnection)'
-        commandOptions: '-out=tfplan'
+        commandOptions: '-out=tfplan -input=false -detailed-exitcode'
+      env:
+        TF_VAR_key_vault_principal_id: $(key_vault_principal_id)
 
 
     # --------------------------------------------------------
@@ -595,7 +615,7 @@ stages:
         backendAzureRmResourceGroupName: '$(ResourceGroupName)'
         backendAzureRmStorageAccountName: '$(StorageAccountName)'
         backendAzureRmContainerName: '$(ContainerName)'
-        backendAzureRmKey: '$(backendStorageAccountKey)'
+        backendAzureRmKey: '$(backendKey)'
 
 
     # --------------------------------------------------------
