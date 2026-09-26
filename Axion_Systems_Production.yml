@@ -40,7 +40,7 @@ stages:
 
 - stage: TerraformInitAndValidateFmt
   displayName: 'Terraform Initialization And Validation'
-  dependson: 
+  dependsOn: 
     - Infracost
 
   pool:
