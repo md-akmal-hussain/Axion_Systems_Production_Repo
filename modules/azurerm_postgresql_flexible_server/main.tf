@@ -38,3 +38,10 @@ resource "azurerm_postgresql_flexible_server_configuration" "azure_extensions" {
   server_id = azurerm_postgresql_flexible_server.psql["psql1"].id
   value     = "timescaledb"
 }
+
+resource "azurerm_postgresql_flexible_server_configuration" "shared_preload_libraries" {
+  name      = "shared_preload_libraries"
+  server_id = azurerm_postgresql_flexible_server.psql["psql1"].id
+
+  value = "pg_cron,pg_stat_statements,azure,pg_qs,pgaadauth,pgms_stats,pgms_wait_sampling,pg_availability,timescaledb"
+}
