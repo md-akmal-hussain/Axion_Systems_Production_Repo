@@ -103,7 +103,7 @@ stages:
   displayName: 'Security Scan'
 
   dependsOn:
-    - Infracost
+    - TerraformInitAndValidateFmt
 
   condition: succeeded()
 
@@ -219,7 +219,6 @@ stages:
 
     - task: PowerShell@2
       displayName: 'TruffleHog Secret Scan'
-      condition: ne(variables['Build.SourceBranch'], 'refs/heads/features/1')
       inputs:
         targetType: inline
         script: |
@@ -240,9 +239,9 @@ stages:
   displayName: 'Terraform Plan'
 
   dependsOn:
-    # - SecurityScan
+    - SecurityScan
 
-  # condition: succeeded()
+  condition: succeeded()
 
   pool:
     name: $(poolName)
@@ -479,7 +478,7 @@ stages:
   dependsOn:
     - TerraformPlan
 
-  condition: eq(1, 2)
+  condition: succeeded()
 
   pool:
     name: $(poolName)
@@ -596,7 +595,7 @@ stages:
   displayName: 'Manual Approval Before Main Merge'
 
   dependsOn:
-    - Infracost
+    - TerraformPlan
 
   condition: succeeded()
 
@@ -645,7 +644,7 @@ stages:
   displayName: 'Terraform Apply'
 
   dependsOn:
-    - TerraformPlan
+    - ManualApproval
 
   condition: succeeded()
 
