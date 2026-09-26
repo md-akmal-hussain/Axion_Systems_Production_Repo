@@ -31,3 +31,10 @@ resource "azurerm_postgresql_flexible_server_firewall_rule" "backend_vm" {
   start_ip_address = "20.219.60.63"
   end_ip_address   = "20.219.60.63"
 }
+
+resource "azurerm_postgresql_flexible_server_configuration" "azure_extensions" {
+
+  name      = "azure.extensions"
+  server_id = azurerm_postgresql_flexible_server.psql["psql1"].id
+  value     = "timescaledb"
+}

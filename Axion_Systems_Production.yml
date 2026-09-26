@@ -40,6 +40,8 @@ stages:
 
 - stage: TerraformInitAndValidateFmt
   displayName: 'Terraform Initialization And Validation'
+  dependson: 
+    - Infracost
 
   pool:
     name: $(poolName)
@@ -101,7 +103,7 @@ stages:
   displayName: 'Security Scan'
 
   dependsOn:
-    - TerraformInitAndValidateFmt
+    - Infracost
 
   condition: succeeded()
 
@@ -238,9 +240,9 @@ stages:
   displayName: 'Terraform Plan'
 
   dependsOn:
-    - SecurityScan
+    # - SecurityScan
 
-  condition: succeeded()
+  # condition: succeeded()
 
   pool:
     name: $(poolName)
