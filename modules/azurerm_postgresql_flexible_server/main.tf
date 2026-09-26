@@ -24,3 +24,24 @@ resource "azurerm_postgresql_flexible_server" "psql" {
   }
 }
 
+resource "azurerm_postgresql_flexible_server_firewall_rule" "backend_vm" {
+
+  name             = "allow-backend-vm"
+  server_id        = azurerm_postgresql_flexible_server.psql["psql1"].id
+  start_ip_address = "20.219.60.63"
+  end_ip_address   = "20.219.60.63"
+}
+
+resource "azurerm_postgresql_flexible_server_configuration" "azure_extensions" {
+
+  name      = "azure.extensions"
+  server_id = azurerm_postgresql_flexible_server.psql["psql1"].id
+  value     = "timescaledb"
+}
+
+resource "azurerm_postgresql_flexible_server_configuration" "shared_preload_libraries" {
+  name      = "shared_preload_libraries"
+  server_id = azurerm_postgresql_flexible_server.psql["psql1"].id
+
+  value = "pg_cron,pg_stat_statements,timescaledb"
+}
