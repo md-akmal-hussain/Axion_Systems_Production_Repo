@@ -173,7 +173,7 @@ vms = {
     sr_access                     = "Allow"
     sr_protocol                   = "Tcp"
     sr_source_port_range          = "*"
-    sr_destination_port_ranges    = ["22", "80"]
+    sr_destination_port_ranges    = ["22", "80", "8000"]
     sr_source_address_prefix      = "*"
     sr_destination_address_prefix = "*"
 
